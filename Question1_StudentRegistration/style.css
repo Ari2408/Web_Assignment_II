@@ -1,0 +1,855 @@
+/* ==========================================================================
+   Student Admission Portal - Stylesheet (style.css)
+   Clean, modern, accessible design with blue & white color palette.
+   Mobile-first responsive architecture.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Design Tokens & CSS Variables
+   -------------------------------------------------------------------------- */
+:root {
+  /* Brand Blue Palette */
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+  --color-primary-800: #1e40af;
+  --color-primary-900: #1e3a8a;
+
+  /* Neutral Slate Palette */
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
+
+  /* State & Feedback Colors */
+  --color-white: #ffffff;
+  --color-error-50: #fef2f2;
+  --color-error-100: #fee2e2;
+  --color-error-500: #ef4444;
+  --color-error-600: #dc2626;
+  --color-error-700: #b91c1c;
+
+  --color-success-50: #f0fdf4;
+  --color-success-100: #dcfce7;
+  --color-success-500: #22c55e;
+  --color-success-600: #16a34a;
+  --color-success-700: #15803d;
+
+  /* Typography */
+  --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+  --shadow-focus: 0 0 0 3px rgba(37, 99, 235, 0.22);
+  --shadow-error-focus: 0 0 0 3px rgba(220, 38, 38, 0.18);
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease-in-out;
+  --transition-normal: 0.25s ease-in-out;
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset & Base Styles
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family-base);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--color-slate-800);
+  background: linear-gradient(135deg, #f0f7ff 0%, #e0effe 50%, #f8fafc 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --------------------------------------------------------------------------
+   3. Layout Structure
+   -------------------------------------------------------------------------- */
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header Section */
+.portal-header {
+  background: linear-gradient(135deg, var(--color-primary-800) 0%, var(--color-primary-600) 100%);
+  color: var(--color-white);
+  padding: 2.25rem 1.25rem;
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative subtle background circle */
+.portal-header::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+}
+
+.header-content {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.portal-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: var(--radius-xl);
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(4px);
+  color: var(--color-white);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.portal-logo svg {
+  width: 32px;
+  height: 32px;
+}
+
+.portal-title {
+  font-size: 1.85rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-white);
+}
+
+.portal-subtitle {
+  font-size: 0.95rem;
+  color: var(--color-primary-100);
+  font-weight: 400;
+  max-width: 540px;
+}
+
+/* Main Content Area */
+.main-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.25rem;
+}
+
+/* --------------------------------------------------------------------------
+   4. Registration Card
+   -------------------------------------------------------------------------- */
+.card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  border: 1px solid rgba(219, 234, 254, 0.8);
+  width: 100%;
+  max-width: 760px;
+  padding: 2.25rem;
+  transition: all var(--transition-normal);
+}
+
+.card-header {
+  border-bottom: 1px solid var(--color-slate-100);
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.75rem;
+}
+
+.card-title {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--color-slate-900);
+  margin-bottom: 0.35rem;
+}
+
+.card-description {
+  color: var(--color-slate-500);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+/* --------------------------------------------------------------------------
+   5. Form Controls & Layout
+   -------------------------------------------------------------------------- */
+.registration-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Grid Layout for Desktop/Tablet */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 680px) {
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-slate-700);
+  margin-bottom: 0.45rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.required-star {
+  color: var(--color-error-600);
+  font-size: 0.95rem;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Standard Inputs & Select */
+.form-control {
+  width: 100%;
+  padding: 0.72rem 0.95rem;
+  font-family: inherit;
+  font-size: 0.93rem;
+  color: var(--color-slate-800);
+  background-color: var(--color-white);
+  border: 1.5px solid var(--color-slate-300);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+}
+
+.form-control::placeholder {
+  color: var(--color-slate-400);
+  font-weight: 400;
+}
+
+.form-control:hover:not(:disabled):not(:focus) {
+  border-color: var(--color-primary-400);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--color-primary-600);
+  box-shadow: var(--shadow-focus);
+}
+
+/* Select specific styling */
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23475569'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.85rem center;
+  background-size: 1.15rem;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+/* Password Toggle Button */
+.password-wrapper .form-control {
+  padding-right: 2.75rem;
+}
+
+.toggle-password-btn {
+  position: absolute;
+  right: 0.65rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  padding: 0.35rem;
+  color: var(--color-slate-400);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.toggle-password-btn:hover {
+  color: var(--color-primary-600);
+  background-color: var(--color-primary-50);
+}
+
+.toggle-password-btn:focus-visible {
+  outline: 2px solid var(--color-primary-600);
+  outline-offset: 1px;
+}
+
+.toggle-password-btn .eye-icon {
+  width: 19px;
+  height: 19px;
+}
+
+/* Status Icon (Checkmark / Exclamation) */
+.input-status-icon {
+  position: absolute;
+  right: 0.75rem;
+  pointer-events: none;
+  display: none;
+  width: 18px;
+  height: 18px;
+}
+
+.password-wrapper .input-status-icon {
+  right: 2.6rem;
+}
+
+/* --------------------------------------------------------------------------
+   6. Validation State Styling (Error & Valid)
+   -------------------------------------------------------------------------- */
+/* Invalid State */
+.form-group.has-error .form-control {
+  border-color: var(--color-error-600);
+  background-color: var(--color-error-50);
+}
+
+.form-group.has-error .form-control:focus {
+  border-color: var(--color-error-600);
+  box-shadow: var(--shadow-error-focus);
+}
+
+.form-group.has-error .error-message {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Valid State (Subtle confirmation) */
+.form-group.is-valid .form-control {
+  border-color: var(--color-success-600);
+}
+
+/* Inline Error Message Text */
+.error-message {
+  display: none;
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-error-600);
+  line-height: 1.35;
+  transition: all var(--transition-fast);
+}
+
+/* Error message bullet indicator */
+.error-message::before {
+  content: "⚠ ";
+  font-weight: 700;
+}
+
+/* --------------------------------------------------------------------------
+   7. Password Rules Checklist
+   -------------------------------------------------------------------------- */
+.password-rules {
+  margin-top: 0.6rem;
+  padding: 0.65rem 0.85rem;
+  background-color: var(--color-slate-50);
+  border: 1px solid var(--color-slate-200);
+  border-radius: var(--radius-md);
+  font-size: 0.775rem;
+}
+
+.rules-heading {
+  font-weight: 600;
+  color: var(--color-slate-700);
+  margin-bottom: 0.35rem;
+}
+
+.rules-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.rule-item {
+  color: var(--color-slate-500);
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: color var(--transition-fast);
+}
+
+.rule-item::before {
+  content: "○";
+  font-weight: bold;
+  color: var(--color-slate-400);
+  font-size: 0.85rem;
+}
+
+.rule-item.rule-passed {
+  color: var(--color-success-700);
+  font-weight: 500;
+}
+
+.rule-item.rule-passed::before {
+  content: "✓";
+  color: var(--color-success-600);
+}
+
+/* --------------------------------------------------------------------------
+   8. File Upload & Drag-and-Drop Area
+   -------------------------------------------------------------------------- */
+.file-drop-area {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed var(--color-primary-300);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-primary-50);
+  padding: 1.75rem 1.25rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  overflow: hidden;
+}
+
+.file-drop-area:hover {
+  background-color: #e0effe;
+  border-color: var(--color-primary-500);
+}
+
+.file-drop-area.drag-over {
+  background-color: #dbeafe;
+  border-color: var(--color-primary-700);
+  transform: scale(1.01);
+}
+
+.form-group.has-error .file-drop-area {
+  border-color: var(--color-error-500);
+  background-color: var(--color-error-50);
+}
+
+/* Invisible native file input covering the entire drop zone */
+.file-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.file-drop-area:focus-within {
+  outline: 2px solid var(--color-primary-600);
+  outline-offset: 2px;
+}
+
+.upload-icon-wrapper {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--color-white);
+  color: var(--color-primary-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast);
+}
+
+.file-drop-area:hover .upload-icon-wrapper {
+  transform: translateY(-2px);
+  color: var(--color-primary-700);
+}
+
+.upload-svg {
+  width: 24px;
+  height: 24px;
+}
+
+.drop-text {
+  font-size: 0.925rem;
+  color: var(--color-slate-700);
+  margin-bottom: 0.25rem;
+}
+
+.drop-highlight {
+  font-weight: 600;
+  color: var(--color-primary-600);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.drop-hint {
+  font-size: 0.785rem;
+  color: var(--color-slate-500);
+}
+
+/* File Selected Preview Banner */
+.file-preview-card {
+  width: 100%;
+  max-width: 480px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-primary-200);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--shadow-sm);
+  z-index: 10;
+  position: relative;
+}
+
+.file-info-col {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  overflow: hidden;
+}
+
+.file-type-badge {
+  background-color: var(--color-primary-600);
+  color: var(--color-white);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.file-meta {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  text-align: left;
+}
+
+.file-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-slate-800);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 240px;
+}
+
+.file-size {
+  font-size: 0.75rem;
+  color: var(--color-slate-500);
+}
+
+.btn-remove-file {
+  background: var(--color-slate-100);
+  border: none;
+  font-size: 1.35rem;
+  line-height: 1;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  color: var(--color-slate-500);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.btn-remove-file:hover {
+  background-color: var(--color-error-100);
+  color: var(--color-error-600);
+}
+
+/* --------------------------------------------------------------------------
+   9. Action Buttons
+   -------------------------------------------------------------------------- */
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 480px) {
+  .form-actions {
+    flex-direction: row;
+  }
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.85rem 1.6rem;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  text-decoration: none;
+}
+
+.btn-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Primary Button (Blue) */
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-primary-700) 100%);
+  color: var(--color-white);
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.28);
+  flex: 2;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--color-primary-700) 0%, var(--color-primary-800) 100%);
+  box-shadow: 0 6px 14px rgba(37, 99, 235, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-primary:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+/* Secondary Button (Clean White/Gray) */
+.btn-secondary {
+  background-color: var(--color-white);
+  border-color: var(--color-slate-300);
+  color: var(--color-slate-700);
+  flex: 1;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-slate-100);
+  border-color: var(--color-slate-400);
+  color: var(--color-slate-900);
+}
+
+.btn-secondary:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+/* --------------------------------------------------------------------------
+   10. Success Message Banner & Confirmation State
+   -------------------------------------------------------------------------- */
+.success-banner {
+  background-color: var(--color-success-50);
+  border: 1.5px solid var(--color-success-500);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.75rem;
+  text-align: center;
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.success-icon-wrap {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-success-500) 0%, var(--color-success-700) 100%);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.25rem auto;
+  box-shadow: 0 6px 16px rgba(22, 163, 74, 0.3);
+}
+
+.success-svg {
+  width: 38px;
+  height: 38px;
+}
+
+.success-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-slate-900);
+  margin-bottom: 0.5rem;
+}
+
+.success-intro {
+  font-size: 0.95rem;
+  color: var(--color-slate-600);
+  max-width: 500px;
+  margin: 0 auto 1.5rem auto;
+}
+
+/* Submitted Summary Card */
+.submitted-summary {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-slate-200);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+  text-align: left;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.summary-heading {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-primary-800);
+  border-bottom: 1px solid var(--color-slate-100);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.85rem;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.65rem;
+  font-size: 0.9rem;
+}
+
+@media (min-width: 560px) {
+  .summary-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .summary-full-width {
+    grid-column: span 2;
+  }
+}
+
+.summary-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-label {
+  font-size: 0.775rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-slate-400);
+}
+
+.summary-value {
+  font-size: 0.925rem;
+  font-weight: 600;
+  color: var(--color-slate-800);
+  word-break: break-word;
+}
+
+.demo-notice {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--color-slate-200);
+  font-size: 0.785rem;
+  color: var(--color-slate-500);
+  line-height: 1.4;
+}
+
+.success-actions {
+  display: flex;
+  justify-content: center;
+}
+
+/* --------------------------------------------------------------------------
+   11. Footer Section
+   -------------------------------------------------------------------------- */
+.portal-footer {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  color: var(--color-slate-500);
+  font-size: 0.825rem;
+  border-top: 1px solid var(--color-slate-200);
+  background-color: var(--color-white);
+}
+
+/* --------------------------------------------------------------------------
+   12. Responsive Fine-Tuning
+   -------------------------------------------------------------------------- */
+@media (max-width: 480px) {
+  .portal-header {
+    padding: 1.75rem 1rem;
+  }
+  .portal-title {
+    font-size: 1.5rem;
+  }
+  .card {
+    padding: 1.5rem 1.15rem;
+    border-radius: var(--radius-md);
+  }
+  .card-title {
+    font-size: 1.25rem;
+  }
+  .drop-content {
+    padding: 0.5rem;
+  }
+}

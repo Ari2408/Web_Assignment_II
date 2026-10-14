@@ -1,0 +1,720 @@
+/* ==========================================================================
+   Student Profile Portal - Stylesheet (style.css)
+   Clean, modern, responsive interface for Java Servlet / JSP Application
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Design Variables & Tokens
+   -------------------------------------------------------------------------- */
+:root {
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+  --color-primary-800: #1e40af;
+  --color-primary-900: #1e3a8a;
+
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
+
+  --color-white: #ffffff;
+  --color-error-50: #fef2f2;
+  --color-error-600: #dc2626;
+  --color-success-50: #f0fdf4;
+  --color-success-600: #16a34a;
+
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  --shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.09);
+  --shadow-focus: 0 0 0 3px rgba(37, 99, 235, 0.22);
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  --transition: 0.2s ease-in-out;
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset & Global Base
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--color-slate-800);
+  background-color: #f1f5f9;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: var(--color-primary-600);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+a:hover {
+  color: var(--color-primary-800);
+}
+
+/* --------------------------------------------------------------------------
+   3. Top Navigation Bar
+   -------------------------------------------------------------------------- */
+.navbar {
+  background: linear-gradient(135deg, var(--color-primary-900) 0%, var(--color-primary-700) 100%);
+  color: var(--color-white);
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+.brand-icon {
+  font-size: 1.6rem;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-text strong {
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.brand-tag {
+  font-size: 0.72rem;
+  color: var(--color-primary-200);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.user-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.875rem;
+  color: var(--color-primary-100);
+  background-color: rgba(255, 255, 255, 0.12);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+}
+
+.btn-logout {
+  background-color: rgba(239, 68, 68, 0.18);
+  color: #fecaca;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  padding: 0.4rem 0.85rem;
+  font-size: 0.825rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all var(--transition);
+}
+
+.btn-logout:hover {
+  background-color: var(--color-error-600);
+  color: var(--color-white);
+  border-color: var(--color-error-600);
+}
+
+/* --------------------------------------------------------------------------
+   4. Layout Containers
+   -------------------------------------------------------------------------- */
+.main-wrapper {
+  flex: 1;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+}
+
+.breadcrumb-bar {
+  margin-bottom: 1.25rem;
+  font-size: 0.875rem;
+  color: var(--color-slate-500);
+}
+
+.breadcrumb-bar a {
+  color: var(--color-slate-600);
+}
+
+.breadcrumb-bar a:hover {
+  color: var(--color-primary-600);
+}
+
+.breadcrumb-bar span {
+  color: var(--color-slate-900);
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   5. Cards & General Components
+   -------------------------------------------------------------------------- */
+.card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-slate-200);
+  box-shadow: var(--shadow-sm);
+  padding: 1.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.card-header-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-slate-100);
+  padding-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.page-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-slate-900);
+}
+
+.page-subtitle {
+  font-size: 0.875rem;
+  color: var(--color-slate-500);
+}
+
+/* --------------------------------------------------------------------------
+   6. Students Directory Grid & Table
+   -------------------------------------------------------------------------- */
+.students-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.35rem;
+}
+
+.student-card {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-slate-200);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition);
+}
+
+.student-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary-300);
+}
+
+.student-card-top {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.avatar-wrapper {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  flex-shrink: 0;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--color-primary-100);
+  box-shadow: var(--shadow-sm);
+}
+
+.avatar-initials {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary-600) 0%, var(--color-primary-800) 100%);
+  color: var(--color-white);
+  font-weight: 700;
+  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+}
+
+.student-header-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.student-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-slate-900);
+}
+
+.student-roll {
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: var(--color-slate-500);
+  font-weight: 600;
+}
+
+.student-card-details {
+  background-color: var(--color-slate-50);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 0.85rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.detail-label {
+  color: var(--color-slate-400);
+  font-weight: 500;
+}
+
+.detail-value {
+  color: var(--color-slate-800);
+  font-weight: 600;
+}
+
+.course-badge {
+  display: inline-block;
+  font-size: 0.725rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  background-color: var(--color-primary-100);
+  color: var(--color-primary-800);
+}
+
+.student-card-footer {
+  margin-top: auto;
+  border-top: 1px solid var(--color-slate-100);
+  padding-top: 0.85rem;
+}
+
+.btn-view-profile {
+  display: block;
+  text-align: center;
+  background-color: var(--color-primary-50);
+  color: var(--color-primary-700);
+  border: 1px solid var(--color-primary-200);
+  padding: 0.55rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all var(--transition);
+}
+
+.btn-view-profile:hover {
+  background-color: var(--color-primary-600);
+  color: var(--color-white);
+  border-color: var(--color-primary-600);
+}
+
+/* --------------------------------------------------------------------------
+   7. Student Profile Detailed Page
+   -------------------------------------------------------------------------- */
+.profile-grid-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 840px) {
+  .profile-grid-layout {
+    grid-template-columns: 320px 1fr;
+  }
+}
+
+.profile-card-left {
+  text-align: center;
+}
+
+.profile-hero-avatar {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 1.25rem auto;
+}
+
+.profile-hero-avatar .avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid var(--color-primary-200);
+  box-shadow: var(--shadow-md);
+}
+
+.profile-hero-avatar .avatar-initials {
+  font-size: 2.25rem;
+  border-radius: 50%;
+}
+
+.profile-fullname {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--color-slate-900);
+  margin-bottom: 0.25rem;
+}
+
+.profile-subroll {
+  font-family: monospace;
+  font-size: 0.95rem;
+  color: var(--color-slate-500);
+  margin-bottom: 0.65rem;
+  display: block;
+}
+
+.profile-fields-list {
+  text-align: left;
+  border-top: 1px solid var(--color-slate-100);
+  border-bottom: 1px solid var(--color-slate-100);
+  padding: 1.25rem 0;
+  margin: 1.25rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.profile-field-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-field-item .field-label {
+  font-size: 0.725rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--color-slate-400);
+  letter-spacing: 0.05em;
+}
+
+.profile-field-item .field-value {
+  font-size: 0.925rem;
+  font-weight: 600;
+  color: var(--color-slate-800);
+}
+
+/* Documents List on Profile Page */
+.doc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-top: 1rem;
+}
+
+.doc-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1rem;
+  background-color: var(--color-slate-50);
+  border: 1px solid var(--color-slate-200);
+  border-radius: var(--radius-md);
+  gap: 1rem;
+  transition: all var(--transition);
+}
+
+.doc-item-row:hover {
+  background-color: #f8fafc;
+  border-color: var(--color-primary-300);
+}
+
+.doc-item-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  overflow: hidden;
+}
+
+.doc-icon-badge {
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-primary-100);
+  color: var(--color-primary-800);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.doc-details {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.doc-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-slate-800);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.doc-submeta {
+  font-size: 0.75rem;
+  color: var(--color-slate-500);
+}
+
+.doc-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.btn-doc {
+  padding: 0.35rem 0.65rem;
+  font-size: 0.775rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-slate-200);
+  background-color: var(--color-white);
+  color: var(--color-slate-700);
+  transition: all var(--transition);
+}
+
+.btn-doc:hover {
+  background-color: var(--color-primary-600);
+  color: var(--color-white);
+  border-color: var(--color-primary-600);
+}
+
+/* --------------------------------------------------------------------------
+   8. Login Card Page
+   -------------------------------------------------------------------------- */
+.login-page-body {
+  background: linear-gradient(135deg, #f0f7ff 0%, #e0effe 50%, #f8fafc 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1.5rem;
+}
+
+.login-card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(219, 234, 254, 0.8);
+  width: 100%;
+  max-width: 440px;
+  padding: 2.25rem;
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.login-logo {
+  font-size: 2.75rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.login-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-slate-900);
+}
+
+.login-subtitle {
+  font-size: 0.875rem;
+  color: var(--color-slate-500);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.25rem;
+}
+
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-slate-700);
+  margin-bottom: 0.4rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.72rem 0.9rem;
+  font-family: inherit;
+  font-size: 0.93rem;
+  color: var(--color-slate-800);
+  background-color: var(--color-white);
+  border: 1.5px solid var(--color-slate-300);
+  border-radius: var(--radius-md);
+  transition: all var(--transition);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--color-primary-600);
+  box-shadow: var(--shadow-focus);
+}
+
+.btn-primary-block {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background-color: var(--color-primary-600);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.25);
+  transition: all var(--transition);
+}
+
+.btn-primary-block:hover {
+  background-color: var(--color-primary-700);
+}
+
+.login-demo-box {
+  background-color: var(--color-slate-50);
+  border: 1px dashed var(--color-slate-200);
+  border-radius: var(--radius-md);
+  padding: 0.85rem;
+  margin-top: 1.5rem;
+  font-size: 0.8rem;
+  color: var(--color-slate-600);
+}
+
+.login-demo-box strong {
+  color: var(--color-slate-800);
+}
+
+/* --------------------------------------------------------------------------
+   9. Alerts & Error States
+   -------------------------------------------------------------------------- */
+.alert {
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.alert-danger {
+  background-color: var(--color-error-50);
+  border: 1px solid #fecaca;
+  color: var(--color-error-600);
+}
+
+.alert-success {
+  background-color: var(--color-success-50);
+  border: 1px solid #bbf7d0;
+  color: var(--color-success-600);
+}
+
+.empty-state-box {
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  background-color: var(--color-slate-50);
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--color-slate-300);
+}
+
+.empty-state-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.empty-state-box h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-slate-800);
+  margin-bottom: 0.35rem;
+}
+
+.empty-state-box p {
+  color: var(--color-slate-500);
+  font-size: 0.875rem;
+}
+
+/* --------------------------------------------------------------------------
+   10. Application Footer
+   -------------------------------------------------------------------------- */
+.app-footer {
+  background-color: var(--color-white);
+  border-top: 1px solid var(--color-slate-200);
+  padding: 1.5rem 1rem;
+  text-align: center;
+  font-size: 0.825rem;
+  color: var(--color-slate-500);
+  margin-top: auto;
+}
